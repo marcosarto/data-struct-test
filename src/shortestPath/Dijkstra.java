@@ -21,8 +21,8 @@ public class Dijkstra {
 		previous = new ArrayList<>();
 
 		for (Integer i : m.keySet()) {
-			distance.set(i, Double.POSITIVE_INFINITY); //err distance size = 0
-			previous.set(i, null);
+			distance.add(i, Double.POSITIVE_INFINITY);
+			previous.add(i, null);
 			toCheck.add(i);
 		}
 
@@ -47,19 +47,26 @@ public class Dijkstra {
 	}
 
 	private int minDist(Set<Integer> toCheck) {
-		int index = 0;
-		double min = distance.get(0);
+		int index=0;
 
+		//Controllo che la i venga modificata almeno una volta (non succede se rimangono solo nodi con
+		//distanza infinity, forse solo se isolati?)
+		boolean iNotChanged = true;
+		int lastSetValue= 0; //assume l'ultimo valore del set
+		double min = Double.POSITIVE_INFINITY;
 		for (Integer i : toCheck) {
 			if (Double.compare(min, distance.get(i)) > 0) {
 				min = distance.get(i);
 				index = i;
+				iNotChanged = false;
 			}
+			lastSetValue = i;
 		}
+		if(iNotChanged) return lastSetValue;
 		return index;
 	}
 
-	public List<Integer> retrivePath(int start, int finish) {
+	public List<Integer> retrievePath(int start, int finish) {
 		List<Integer> path = new ArrayList<>();
 
 		path.add(finish); //Setto come punto di partenza l'arrivo (percorso a ritroso)
@@ -74,7 +81,7 @@ public class Dijkstra {
 	}
 
 	//overload per sottointendere root come nodo di partenza
-	public List<Integer> retrivePath(int finish) {
-		return retrivePath(root, finish);
+	public List<Integer> retrievePath(int finish) {
+		return retrievePath(root, finish);
 	}
 }
