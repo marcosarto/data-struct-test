@@ -13,7 +13,11 @@ public class AdjacenceListTest {
 		a.addEdge(0,3,1);
 		a.addEdge(1,4,1);
 		a.addEdge(2,4,2);
+		//syso perche` uguale a sopra
+		a.addEdge(2,4,2);
 		a.addEdge(3,4,3);
+		//syso perche` nodo partenza non trovato
+		a.addEdge(99,0,2);
 
 
 		Dijkstra d = new Dijkstra(a.getAdjacent(),0);
@@ -21,11 +25,7 @@ public class AdjacenceListTest {
 			System.out.println(i);
 		}
 
-//		a.addEdge(4,1);
-		/*Manca controllo del parametro from
-		//cosa succede se metto due volte lo stesso collegamento (addEdge)
-		Aggiungi restituzione peso oltre al percorso a ritroso
-		 */
+		//Aggiungi restituzione peso oltre al percorso a ritroso
 //		System.out.println(a.toString());
 	}
 }

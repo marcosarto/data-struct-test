@@ -14,9 +14,23 @@ public class AdjacenceList {
 	}
 
 	public void addEdge(int from,int to,int weight){
-		adjacent.get(from).add(new Node(to,weight));
-		if(!adjacent.containsKey(to))
-			adjacent.put(to,new LinkedList<>());
+		if(adjacent.containsKey(from)) {
+
+			Node n = new Node(to, weight);
+
+			//Controllo che non sia gia` presente un percorso tra questi due nodi
+			if (!adjacent.get(from).contains(n))
+				adjacent.get(from).add(n);
+			else
+				System.out.printf("E` gia` stato specificato un percorso tra %s e %s\n", from, to);
+
+			//Se e` la prima volta che aggiungo un certo nodo come destinazione predispongo
+			//una linkedlist nella mappa per eventuali suoi(del nuovo nodo 'to') collegamenti
+			if (!adjacent.containsKey(to))
+				adjacent.put(to, new LinkedList<>());
+		}
+		else
+			System.out.printf("Il nodo di partenza %s non e` presente nel grafo\n",from);
 	}
 
 	public void addEdge(int from,int to){
