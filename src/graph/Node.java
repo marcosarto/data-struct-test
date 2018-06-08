@@ -2,7 +2,7 @@ package graph;
 
 import java.util.Objects;
 
-public class Node {
+public class Node{
 	int to, weight;
 
 	public Node(int to, int weight) {
