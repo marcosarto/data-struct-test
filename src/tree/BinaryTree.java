@@ -8,18 +8,26 @@ public class BinaryTree<T extends Comparable> {
 		this.el = el;
 	}
 
-	public void addChild(BinaryTree<T> child){
-		if(child.getEl().compareTo(el)<0) leftChild=child;
-		else rightChild = child;
+	public void addChild(T child){
+		if(child.compareTo(el)<0){
+			if(leftChild!=null) leftChild.addChild(child);
+			else leftChild = new BinaryTree<>(child);
+		}
+		else {
+			if (rightChild != null) rightChild.addChild(child);
+			else rightChild = new BinaryTree<>(child);
+		}
 	}
 
-	public T getEl() {
-		return el;
-	}
-
-	public String toString(){
-		String msg;
-		msg = "Il padre e`: "+el+" il figlio destro e`: "+rightChild+" il figlio sinistro e`: "+leftChild;
-		return msg;
+	public void print(){
+		System.out.println("Elemento: "+el);
+		if(leftChild!=null) {
+			System.out.println("Elementi ramo sinistro: ");
+			leftChild.print();
+		}
+		if(rightChild!=null) {
+			System.out.println("Elementi ramo dx: ");
+			rightChild.print();
+		}
 	}
 }
