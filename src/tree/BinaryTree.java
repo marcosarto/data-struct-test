@@ -1,6 +1,6 @@
 package tree;
 
-public class BinaryTree<T extends Comparable<? super T>> { //perche super?
+public class BinaryTree<T extends Comparable<T>> { //anche Comparable<? super T> volendo
 	private BinaryTree<T> leftChild,rightChild;
 	private T el;
 	private final int depth;
@@ -25,17 +25,35 @@ public class BinaryTree<T extends Comparable<? super T>> { //perche super?
 	public void addChild(T child){
 		if(child.compareTo(el)<0){
 			if(leftChild!=null) leftChild.addChild(child);
-			else leftChild = new BinaryTree<>(child);
+			else leftChild = new BinaryTree<>(child,(depth+1));
 		}
 		else {
 			if (rightChild != null) rightChild.addChild(child);
-			else rightChild = new BinaryTree<>(child);
+			else rightChild = new BinaryTree<>(child,(depth+1));
 		}
 	}
 
+	/**
+	 * Controllo se l'elemento da trovare e` maggiore o minore dell'elemento nel nodo corrente,
+	 * se il ramo nel quale dovrei controllare e` null vuol dire che l'albero non contiene
+	 * l'elemento da trovare e termino restituendo false, se invece il compareTo restituisce
+	 * 0 vuol dire che ho trovato l'elemento cercato
+	 *
+	 * @param elToFind  elemento da trovare
+	 * @return boolean che indica se e` stato trovato o meno
+	 */
+	public boolean contains(T elToFind){
+		if(elToFind.compareTo(el)<0&&leftChild!=null)
+			return leftChild.contains(elToFind);
+		else if(elToFind.compareTo(el)>0&&rightChild!=null)
+			return rightChild.contains(elToFind);
+		else if(elToFind.equals(el))
+			return true;
+		return false;
+	}
+
 	public void print(){
-		System.out.println("Elemento: "+el+" profondita` : "+count);
-		count++;
+		System.out.println("Elemento: "+el+" profondita` : "+depth);
 
 		if(leftChild!=null) {
 			leftChild.print();
@@ -45,3 +63,4 @@ public class BinaryTree<T extends Comparable<? super T>> { //perche super?
 		}
 	}
 }
+

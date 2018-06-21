@@ -3,7 +3,7 @@ package graph;
 import java.util.Objects;
 
 public class Node{
-	int to, weight;
+	private int to, weight;
 
 	public Node(int to, int weight) {
 		this.to = to;
