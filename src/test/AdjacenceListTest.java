@@ -1,13 +1,13 @@
 package test;
 
 
-import graph.AdjacenceList;
-import shortestPath.Dijkstra;
+import graph.AdjacencyList;
+import graph.Dijkstra;
 
 public class AdjacenceListTest {
 
 	public static void main(String[] args){
-		AdjacenceList a = new AdjacenceList(0);
+		AdjacencyList a = new AdjacencyList(0);
 		a.addEdge(0,1,1);
 		a.addEdge(0,2,1);
 		a.addEdge(0,3,1);

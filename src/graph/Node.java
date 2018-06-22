@@ -2,10 +2,14 @@ package graph;
 
 import java.util.Objects;
 
-public class Node{
+/**
+ * Il nodo rappresenta il peso tra due "interi" del grafo, come intero di partenza viene sottointeso
+ * quello che rappresenza la chiave collegata alla linkedList con all'interno i vari nodi
+ */
+public class Node {
 	private int to, weight;
 
-	public Node(int to, int weight) {
+	Node(int to, int weight) {
 		this.to = to;
 		this.weight = weight;
 	}
@@ -31,7 +35,6 @@ public class Node{
 	//generato da intellij
 	@Override
 	public int hashCode() {
-
 		return Objects.hash(to, weight);
 	}
 

@@ -1,6 +1,7 @@
-package shortestPath;
+package graph;
 
 import java.util.*;
+
 import graph.Node;
 
 public class Dijkstra {
@@ -47,12 +48,12 @@ public class Dijkstra {
 	}
 
 	private int minDist(Set<Integer> toCheck) {
-		int index=0;
+		int index = 0;
 
 		//Controllo che la i venga modificata almeno una volta (non succede se rimangono solo nodi con
 		//distanza infinity, forse solo se isolati?)
 		boolean iNotChanged = true;
-		int lastSetValue= 0; //assume l'ultimo valore del set
+		int lastSetValue = 0; //assume l'ultimo valore del set
 		double min = Double.POSITIVE_INFINITY;
 		for (Integer i : toCheck) {
 			if (Double.compare(min, distance.get(i)) > 0) {
@@ -62,7 +63,7 @@ public class Dijkstra {
 			}
 			lastSetValue = i;
 		}
-		if(iNotChanged) return lastSetValue;
+		if (iNotChanged) return lastSetValue;
 		return index;
 	}
 
