@@ -7,13 +7,20 @@ import graph.Node;
 public class Dijkstra {
 	private Map<Integer, LinkedList<Node>> m;
 	private int root;
+	/*
+	 * Dato come indice un nodo viene data la distanza dalla root
+	 */
 	private List<Double> distance;
+	/*
+	 * Dato come indice un nodo viene dato il nodo precedente da percorrere per arrivare alla
+	 * root con il percorso minimo
+	 */
 	private List<Integer> previous;
 
 	public Dijkstra(Map<Integer, LinkedList<Node>> m, int root) {
 		this.m = m;
 		this.root = root;
-		algDijkstra();
+		algDijkstra(); //Calcola i percorsi minimi dei vari nodi alla creazione dell'oggetto
 	}
 
 	private void algDijkstra() {
@@ -21,17 +28,22 @@ public class Dijkstra {
 		distance = new ArrayList<>();
 		previous = new ArrayList<>();
 
+		/*
+		 * Ogni chiave della mappa viene aggiunta alla lista distance con un valore infinito,
+		 * ne viene settato il precedente null (perche` non lo si conosce ancora),
+		 * vine aggiunta al set toCheck indicando che non abbiamo ancora controllato quel nodo
+		 */
 		for (Integer i : m.keySet()) {
 			distance.add(i, Double.POSITIVE_INFINITY);
 			previous.add(i, null);
 			toCheck.add(i);
 		}
 
-		distance.set(root, 0.0);
+		distance.set(root, 0.0); //La distanza da percorrere per arrivare alla root e` 0
 
 		do {
 			int nodeToExamine = minDist(toCheck);
-			toCheck.remove(nodeToExamine);//qui
+			toCheck.remove(nodeToExamine);
 
 			for (Node n : m.get(nodeToExamine)) {
 				if (!toCheck.contains(n.getTo()))
@@ -47,6 +59,12 @@ public class Dijkstra {
 		} while (!toCheck.isEmpty());
 	}
 
+	/**
+	 * Cerca il nodo con distanza minima dalla root nel set toCheck
+	 *
+	 * @param toCheck set contenente i nodi non ancora controllati
+	 * @return l'indice del nodo con distanza minima dalla root
+	 */
 	private int minDist(Set<Integer> toCheck) {
 		int index = 0;
 
@@ -67,6 +85,14 @@ public class Dijkstra {
 		return index;
 	}
 
+	/**
+	 * L'oggetto contiene gia' i percorsi minimi nelle variabili locali, questo metodo
+	 * consente di ricevere una lista con i nodi da percorrere
+	 *
+	 * @param start  nodo di partenza
+	 * @param finish nodo di arrivo
+	 * @return lista contenente i nodi da percorrere per raggiungere l'arrivo con il percorso minimo
+	 */
 	public List<Integer> retrievePath(int start, int finish) {
 		List<Integer> path = new ArrayList<>();
 
