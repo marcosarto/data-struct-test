@@ -47,9 +47,7 @@ public class BinaryTree<T extends Comparable<T>> { //anche Comparable<? super T>
 			return leftChild.contains(elToFind);
 		else if(elToFind.compareTo(el)>0&&rightChild!=null)
 			return rightChild.contains(elToFind);
-		else if(elToFind.equals(el))
-			return true;
-		return false;
+		return elToFind.equals(el);
 	}
 
 	public void print(){
